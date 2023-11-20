@@ -37,7 +37,7 @@ auth(app);
 
 app.use((err, req, res, next) => {
     console.log(err)
-    res.status(err.status || 500).send(err.message || 'Internal server error 999');
+    res.status(err.status || 500).send(err.message || 500).send(err.stack);
 });
 
 
