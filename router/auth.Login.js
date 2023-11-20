@@ -5,8 +5,8 @@ const express = require('express');
 // const userService = require('../service/user.Service');
 const AuthService = require("../service/auth.Service");
 
-const authResponse = require('../helpers/authResponse');
-const authMiddleware = require('../middleware/authValidation');
+// const authResponse = require('../helpers/authResponse');
+// const authMiddleware = require('../middleware/authValidation');
 
 
 function AuthRoute(app) {
