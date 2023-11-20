@@ -28,6 +28,13 @@ auth(app);
 
 // app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(require('./libs/swagger/swagger.json')));
 
+//Error handler.
+app.use((err, req, res, next) => {
+    console.log(err)
+    const { output: { statusCode, payload } } = err;
+    res.status(statusCode).json(withErrorStack(payload, err.stack));
+});
+
 
 module.exports = app
 
