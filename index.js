@@ -7,7 +7,8 @@ const { config } = require("./config/config");
 const app = express();
 
 //importar rutas
-const auth = require('./router/auth.Router');
+const Auth = require('./router/auth.Router');
+const User = require('./router/user.Router');
 
 
 //middlewares
@@ -23,7 +24,8 @@ app.disable('x-powered-by'); //es linea de seguridad para que no se sepa que tec
 
 
 //utilizar rutas
-auth(app);
+Auth(app);
+User(app);
 
 
 // app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(require('./libs/swagger/swagger.json')));
