@@ -18,6 +18,7 @@ app.use(cors("*"))
 //     origin:["http://localhost:3000","http://127.0.0.1:5500"],
 //     credentials:true
 // }))
+app.disable('x-powered-by'); //es linea de seguridad para que no se sepa que tecnologia se esta utilizando en el backend
 
 
 //utilizar rutas
