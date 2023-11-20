@@ -15,6 +15,20 @@ function AuthRoute(app) {
 
     app.use('/api/auth', router);
 
+    router.get("/users", async (req, res) => {
+        try {
+            const result = await authServ.getAllUsers()
+            res.json({
+                message: "get all users",
+                result
+            })
+        } catch (err) {
+            return res.status(500).json({
+                message: err.message
+            })
+        }
+    })
+
     router.post("/login", async (req, res) => {
         try {
             const result = await authServ.login(req.body)
