@@ -12,7 +12,7 @@ const app = express();
 //middlewares
 app.use(morgan('dev'));
 app.use(express.json());
-app.use(express.urlencoded({extended:false}));
+app.use(express.urlencoded({ extended: true })); //si lo tengo en true me permite enviar imagenes y archivos y es false solo permite texto
 app.use(cors("*"))
 // app.use(cors({
 //     origin:["http://localhost:3000","http://127.0.0.1:5500"],
@@ -26,6 +26,6 @@ app.use(cors("*"))
 // app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(require('./libs/swagger/swagger.json')));
 
 
-module.exports = app 
+module.exports = app
 
 
