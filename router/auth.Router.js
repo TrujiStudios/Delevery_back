@@ -43,18 +43,21 @@ function AuthRoute(app) {
         }
     })
 
-    router.post("/signup", async (req, res) => {
+    router.post("/signup", async (req, res, next) => {
         try {
-            throw new Error("Error forzado"); // Lanzar un error forzado
             const result = await authServ.signup(req.body)
-            return res.json({
+            return res.status(201).json({
+                success: true,
                 message: "signup successfully",
-                result
+                result: result.id
             })
         } catch (err) {
-            return res.status(500).json({
-                message: err.message
-            })
+            console.log(`Error: ${err}`);
+            return res.status(501).json({
+                success: false,
+                message: "Error: al crear el usuario",
+                err
+            });
         }
     });
 

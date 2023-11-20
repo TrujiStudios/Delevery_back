@@ -3,7 +3,7 @@ const User = require('../database/models/user.Model');
 
 class UserService {
     constructor() {
-        const User = new User();
+        // const User = new User();
         this.user = User;
     }
     async getAllUsers(){

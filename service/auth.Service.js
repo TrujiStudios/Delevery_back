@@ -11,15 +11,10 @@ class authService{
 
     }
 
-    async signup(req,res){
-
-        console.log(req.body);
-
-        return {
-            message: 'User created successfully',
-            req: req.body
-           
-        }
+    async signup(data){
+        console.log("signup <> ", data);
+        const results = await User.create(data);
+        return results;        
 
     }
 

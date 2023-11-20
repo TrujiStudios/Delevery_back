@@ -15,19 +15,24 @@ function userRoute(app) {
 
     app.use('/api/users', router);
 
-    router.get("/", async (req, res) => {
+    router.get("/", async (req, res, next) => {
         try {
-            console.log("hola")
             const result = await userServ.getAllUsers();
             res.json({
+                success: true,
                 message: "get all users",
                 result
             })
         } catch (err) {
-            return res.status(500).json({
-                message: err.message
-            })
+            console.log(`Error: ${err}`);
+            return res.status(501).json({
+                success: false,
+                message: "Error: al obtener los usuarios",
+                err
+            });
+            // next(err);
         }
-    })
+    });
+
 }
 module.exports = userRoute;
