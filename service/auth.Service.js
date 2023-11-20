@@ -1,7 +1,11 @@
-
+const User = require('../database/models/user.Model');
 
 
 class authService{
+
+    constructor(){
+
+    }
 
     async login(req,res){
 
