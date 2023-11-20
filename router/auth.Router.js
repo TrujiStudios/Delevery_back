@@ -31,6 +31,7 @@ function AuthRoute(app) {
 
     router.post("/signup", async (req, res) => {
         try {
+            throw new Error("Error forzado"); // Lanzar un error forzado
             const result = await authServ.signup(req.body)
             return res.json({
                 message: "signup successfully",
@@ -41,7 +42,6 @@ function AuthRoute(app) {
                 message: err.message
             })
         }
-
     });
 
 }
