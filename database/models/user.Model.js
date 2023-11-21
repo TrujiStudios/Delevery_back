@@ -24,11 +24,8 @@ User.create = (user) => {
                 phone,
                 image
             )
-        values($1,$2,$3,$4,$5,$6) RETURNING id
-        
+        values($1,$2,$3,$4,$5,$6) RETURNING id        
     `;
-    console.log("SQL <> ", user);
-    // console.log("SQL 32 <> ", sql);
     return db.one(sql, [
         user.name,
         user.lastname,
@@ -38,17 +35,4 @@ User.create = (user) => {
         user.image,
     ]);
 };
-
-
 module.exports = User;
-
-// VALUES(
-//     $[name],
-//     $[lastname],
-//     $[email],
-//     $[password],
-//     $[phone],
-//     $[image],
-//     $[created_at],
-//     $[updated_at]
-// )
