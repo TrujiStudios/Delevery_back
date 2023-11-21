@@ -17,22 +17,20 @@ User.create = (user) => {
     const sql = `
         INSERT INTO
             users(
+                email,  
                 name,
                 lastname,
-                email,  
                 password,
-                phone,
-                image
+                phone
             )
-        values($1,$2,$3,$4,$5,$6) RETURNING id        
+        values($1,$2,$3,$4,$5) RETURNING id        
     `;
     return db.one(sql, [
+        user.email,
         user.name,
         user.lastname,
-        user.email,
-        user.password,
         user.phone,
-        user.image,
+        user.password,
     ]);
 };
 module.exports = User;
