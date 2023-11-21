@@ -47,16 +47,17 @@ function AuthRoute(app) {
         try {
             const result = await authServ.signup(req.body)
             return res.status(201).json({
-                success: true,
                 message: "signup successfully",
-                result: result.id
+                error: null,
+                success: true,
+                data: result.id
             })
         } catch (err) {
             console.log(`Error: ${err}`);
             return res.status(501).json({
-                success: false,
                 message: "Error: al crear el usuario",
-                err
+                error : err.message,
+                success: false,
             });
         }
     });
