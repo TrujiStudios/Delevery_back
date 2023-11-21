@@ -1,5 +1,6 @@
 'use strict';
 
+const bcrypt = require('bcrypt');
 const db = require('../db');
 
 const User = {};
@@ -14,14 +15,19 @@ User.getAll = () => {
 
 // create users
 User.create = (user) => {
+    // hash password.
+    const salt = bcrypt.genSaltSync(10);
+    const hash = bcrypt.hashSync(user.password, salt);
+    user.password = hash;
+
     const sql = `
         INSERT INTO
             users(
                 email,  
                 name,
                 lastname,
-                password,
-                phone
+                phone,
+                password
             )
         values($1,$2,$3,$4,$5) RETURNING id        
     `;
@@ -30,7 +36,7 @@ User.create = (user) => {
         user.name,
         user.lastname,
         user.phone,
-        user.password,
+        user.password
     ]);
 };
 module.exports = User;

@@ -1,3 +1,4 @@
+const crypto = require('crypto');
 const User = require('../database/models/user.Model');
 
 
