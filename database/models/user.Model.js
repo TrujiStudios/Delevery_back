@@ -28,23 +28,20 @@ User.findById = (id, callback) => {
 };
 
 // find user by email
-User.findByEmail = (email) => {
-    const sql = `
-    SELECT
-        id,
-        email,
-        name,
-        lastname,
-        image,
-        phone,
-        password,
-        session_token
-    FROM
-        users
-    WHERE
-        email = $1
+User.findByEmail = async (email) => {
+    const sql = ` SELECT id,email,name,lastname,image,phone,password,session_token 
+            FROM
+                users
+            WHERE
+                email = $1
     `
-    return db.oneOrNone(sql, email);
+
+    const user = await db.oneOrNone(sql, email);
+    if(!user) throw new Error('User not found');
+    return user;
+
+    // return db.oneOrNone(sql, email);
+    
 }
 
 // create users
