@@ -13,6 +13,20 @@ User.getAll = () => {
     return db.manyOrNone(sql);
 };
 
+// find user by id
+User.findById = (id, callback) => {
+    const sql = `SELECT id,email,name,lastname,image,phone,password,session_token 
+         FROM 
+            users
+                WHERE id = $1
+    `;
+    return db.oneOrNone(sql, id).then((user) => {
+        callback(null, user);
+    }).catch((error) => {
+        callback(error, null);
+    });
+};
+
 // create users
 User.create = (user) => {
     // hash password.
