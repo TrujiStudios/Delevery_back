@@ -14,6 +14,7 @@ const config = {
     emailService: process.env.EMAIL_SERVICE,
     emailUser: process.env.EMAIL_USER,
     emailPass: process.env.EMAIL_PASS,
+    secretOrKey: process.env.SECRET_OR_KEY,
     database:{
         dbUsername: process.env.DB_USERNAME,
         dbPassword: process.env.DB_PASSWORD,
