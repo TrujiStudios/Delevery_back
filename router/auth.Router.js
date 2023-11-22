@@ -15,34 +15,28 @@ function AuthRoute(app) {
 
     app.use('/api/auth', router);
 
-    router.get("/users", async (req, res) => {
-        try {
-            const result = await authServ.getAllUsers()
-            res.json({
-                message: "get all users",
-                result
-            })
-        } catch (err) {
-            return res.status(500).json({
-                message: err.message
-            })
-        }
-    })
+
 
     router.post("/login", async (req, res) => {
         try {
             const result = await authServ.login(req.body)
             res.json({
                 message: "login successfully",
-                result
+                error: null,
+                success: true,
+                data:result
             })
         } catch (err) {
-            return res.status(500).json({
-                message: err.message
+            console.log(`Error: ${error}`);
+            return res.status(501).json({
+                success: false,
+                message: err.message,
+                error: err,
             })
         }
     })
 
+    
     router.post("/signup", async (req, res, next) => {
         try {
             const result = await authServ.signup(req.body)
