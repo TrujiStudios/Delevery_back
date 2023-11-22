@@ -27,6 +27,26 @@ User.findById = (id, callback) => {
     });
 };
 
+// find user by email
+User.findByEmail = (email) => {
+    const sql = `
+    SELECT
+        id,
+        email,
+        name,
+        lastname,
+        image,
+        phone,
+        password,
+        session_token
+    FROM
+        users
+    WHERE
+        email = $1
+    `
+    return db.oneOrNone(sql, email);
+}
+
 // create users
 User.create = (user) => {
     // hash password.
