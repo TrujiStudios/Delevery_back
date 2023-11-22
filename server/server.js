@@ -4,7 +4,7 @@ const {config} = require('../config/config')
 
 const app = require('..')
 
-app.listen(config.port, () => {
+app.listen(config.port, '192.168.0.7' || 'localhost', () => {
     console.log()
     console.log(`Example app listening at http://localhost:${config.port}`)
 })
