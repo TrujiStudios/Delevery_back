@@ -2,11 +2,7 @@
 
 const express = require('express');
 
-// const userService = require('../service/user.Service');
 const AuthService = require("../service/auth.Service");
-
-// const authResponse = require('../helpers/authResponse');
-// const authMiddleware = require('../middleware/authValidation');
 
 
 function AuthRoute(app) {
@@ -17,7 +13,7 @@ function AuthRoute(app) {
 
 
 
-    router.post("/login", async (req, res) => {
+    router.post("/login", async (req, res,next) => {
         try {
             const result = await authServ.login(req.body)
             res.json({
@@ -26,8 +22,12 @@ function AuthRoute(app) {
                 success: true,
                 data:result
             })
+
+            next()
+
+
         } catch (err) {
-            console.log(`Error: ${error}`);
+            console.log(`Error: ${err}`);
             return res.status(501).json({
                 success: false,
                 message: err.message,
@@ -36,7 +36,7 @@ function AuthRoute(app) {
         }
     })
 
-    
+
     router.post("/signup", async (req, res, next) => {
         try {
             const result = await authServ.signup(req.body)
