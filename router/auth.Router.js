@@ -23,15 +23,13 @@ function AuthRoute(app) {
                 data:result
             })
 
-            next()
 
-
-        } catch (err) {
-            console.log(`Error: ${err}`);
+        } catch (error) {
+            console.log(`Error: ${error}`);
             return res.status(501).json({
+                message: error.message,
+                error: error.message,
                 success: false,
-                message: err.message,
-                error: err,
             })
         }
     })
