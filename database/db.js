@@ -1,6 +1,7 @@
 // crear conexion con postgreSQL
 
 const promise = require('bluebird');
+const { config } = require('../config/config');
 
 const options = {
     promiseLib: promise,
@@ -16,11 +17,11 @@ types.setTypeParser(1114, function (stringValue) {
 });
 
 const databaseConfig = {
-    'host': '127.0.0.1',
-    'port': 5432,
-    'database': 'delivery_db',
-    'user': 'postgres',
-    'password': 'admin'
+    'host': config.database.dbHost,
+    'port': config.database.port,
+    'database': config.database.dbName,
+    'user': config.database.dbUsername,
+    'password': config.database.dbPassword
 };
 
 const db = pgp(databaseConfig);
