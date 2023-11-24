@@ -29,19 +29,48 @@ User.findById = (id, callback) => {
 
 // find user by email
 User.findByEmail = async (email) => {
-    const sql = ` SELECT id,email,name,lastname,image,phone,password,session_token 
-            FROM
-                users
-            WHERE
-                email = $1
+    const sql = `SELECT 
+    u.id,
+    u.email,
+    u.name,
+    u.lastname,
+    u.image,
+    u.phone,
+    password,
+    session_token,
+    json_agg(
+        json_build_object(
+            'id', R.id,
+            'name', R.name,
+            'image', R.image,
+            'route', R.route
+        )
+    ) AS roles
+    FROM
+        users As u
+    INNER JOIN user_has_role As UHR
+        ON UHR.user_id = u.id
+    INNER JOIN roles As R
+        ON R.id = UHR.role_id
+    WHERE
+        u.email = $1
+    GROUP BY
+        u.id
+        -- u.email,
+        -- u.name,
+        -- u.lastname,
+        -- u.image,
+        -- u.phone,
+        -- password,
+        -- session_token
     `
 
     const user = await db.oneOrNone(sql, email);
-    if(!user) throw new Error('User not found');
+    if (!user) throw new Error('User not found');
     return user;
 
     // return db.oneOrNone(sql, email);
-    
+
 }
 
 // create users
