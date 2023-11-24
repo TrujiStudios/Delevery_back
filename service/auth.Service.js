@@ -1,6 +1,8 @@
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 
+const UserService = require('../service/user.Service');
+
 const User = require('../database/models/user.Model');
 const { config } = require('../config/config');
 
@@ -8,6 +10,7 @@ const { config } = require('../config/config');
 class authService {
 
     constructor() {
+        this.userService = new UserService();
 
     }
 
@@ -35,7 +38,8 @@ class authService {
     }
 
     async signup(data) {
-        const results = await User.create(data);
+        // const results = await User.create(data);
+        const results = await this.userService.createUser(data);
         return results;
 
     }
