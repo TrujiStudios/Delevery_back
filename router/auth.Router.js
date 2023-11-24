@@ -39,7 +39,7 @@ function AuthRoute(app) {
         try {
             const result = await authServ.signup(req.body)
             return res.status(201).json({
-                message: "signup successfully",
+                message: "El usuario se creo correctamente, inicie sesion",
                 error: null,
                 success: true,
                 data: result.id
