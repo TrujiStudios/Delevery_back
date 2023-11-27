@@ -12,8 +12,8 @@ const storage = new Storage({
     keyFilename: "serviceAccountKey.json"
 });
 
-const bucket = storage.bucket("gs://delivey-app-trujistudios.appspot.com/");
-
+const bucket = storage.bucket("gs://delivey-app-trujistudios.appspot.com");
+// gs://delivey-app-trujistudios.appspot.com/profile
 /**
  * Subir el archivo a Firebase Storage
  * @param {File} file objeto que sera almacenado en Firebase Storage
