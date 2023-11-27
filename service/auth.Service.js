@@ -6,6 +6,9 @@ const UserService = require('../service/user.Service');
 const User = require('../database/models/user.Model');
 const { config } = require('../config/config');
 
+const storage = require('../utils/cloud_storage');
+
+
 
 class authService {
 
@@ -38,11 +41,22 @@ class authService {
         return data;
     }
 
-    async signup(data) {
-        // const results = await User.create(data);
-        const results = await this.userService.createUser(data);
-        return results;
+    // async signup(data) {
+    //     // const results = await User.create(data);
+    //     const results = await this.userService.createUser(data);
+    //     return results;
 
+    // }
+    async signupWithimages(user, files) {
+        if (files.length > 0) {
+            const pathImage = `images_${Date.now()}`
+            const url = await storage(files[0], pathImage, null)
+            if (url != undefined || url != null) {
+                user.image = url
+            }
+        }
+        const results = await this.userService.createUser(user);
+        return results;
     }
 
 
@@ -54,12 +68,6 @@ class authService {
 
 
 
-    async signupWithimages(data) {
-        // const results = await User.create(data);
-        const results = await this.userService.createUser(data);
-        return results;
-
-    }
 
 
 
@@ -67,16 +75,6 @@ class authService {
 
 
 
-
-
-
-
-
-
-
-
-
-    
 
     #createToken(user) {
         const payload = {
