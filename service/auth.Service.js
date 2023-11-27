@@ -46,6 +46,38 @@ class authService {
     }
 
 
+
+
+
+
+
+
+
+
+    async signupWithimages(data) {
+        // const results = await User.create(data);
+        const results = await this.userService.createUser(data);
+        return results;
+
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+
     #createToken(user) {
         const payload = {
             id: user.id,
