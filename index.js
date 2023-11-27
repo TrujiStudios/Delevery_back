@@ -1,6 +1,9 @@
 const express = require('express');
 const morgan = require('morgan');
 const cors = require('cors');
+const multer = require('multer')
+const admin = require('firebase-admin')
+const serviceAccount = require('./serviceAccountKey.json')
 // const swaggerUi = require('swagger-ui-express');
 const { config } = require("./config/config");
 
@@ -9,6 +12,21 @@ const app = express();
 //importar rutas
 const Auth = require('./router/auth.Router');
 const User = require('./router/user.Router');
+
+
+//INICIAR FIREBASE ADMIN
+admin.initializeApp({
+    credential: admin.credential.cert(serviceAccount),
+    storageBucket: config.storageBucket
+})
+
+const upload = multer({
+    storage: multer.memoryStorage(),
+    limits: {
+        fileSize: 5 * 1024 * 1024 // Maximo 5 MB
+    }
+})
+
 
 
 //middlewares
@@ -23,8 +41,11 @@ app.use(cors("*"))
 app.disable('x-powered-by'); //es linea de seguridad para que no se sepa que tecnologia se esta utilizando en el backend
 
 
+
+
+
 //utilizar rutas
-Auth(app);
+Auth(app, upload);
 User(app);
 
 
