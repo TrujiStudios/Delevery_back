@@ -59,23 +59,6 @@ class authService {
         return results;
     }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     #createToken(user) {
         const payload = {
             id: user.id,
