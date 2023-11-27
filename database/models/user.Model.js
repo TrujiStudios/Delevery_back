@@ -87,15 +87,17 @@ User.create = (user) => {
                 name,
                 lastname,
                 phone,
+                image,
                 password
             )
-        values($1,$2,$3,$4,$5) RETURNING id        
+        values($1,$2,$3,$4,$5,$6) RETURNING id        
     `;
     return db.one(sql, [
         user.email,
         user.name,
         user.lastname,
         user.phone,
+        user.image,
         user.password
     ]);
 };
