@@ -27,6 +27,55 @@ User.findById = (id, callback) => {
     });
 };
 
+//find user by id
+User.findByUserId = async (idUser) => {
+    const sql = `SELECT 
+    u.id,
+    u.email,
+    u.name,
+    u.lastname,
+    u.image,
+    u.phone,
+    password,
+    session_token,
+    json_agg(
+        json_build_object(
+            'id', R.id,
+            'name', R.name,
+            'image', R.image,
+            'route', R.route
+        )
+    ) AS roles
+    FROM
+        users As u
+    INNER JOIN user_has_role As UHR
+        ON UHR.user_id = u.id
+    INNER JOIN roles As R
+        ON R.id = UHR.role_id
+    WHERE
+        u.id = $1
+    GROUP BY
+        u.id
+        -- u.email,
+        -- u.name,
+        -- u.lastname,
+        -- u.image,
+        -- u.phone,
+        -- password,
+        -- session_token
+    `
+
+    const user = await db.oneOrNone(sql, idUser);
+    if (!user) throw new Error('User not found by id');
+    return user;
+
+    // return db.oneOrNone(sql, email);
+
+}
+
+
+
+
 // find user by email
 User.findByEmail = async (email) => {
     const sql = `SELECT 
@@ -100,5 +149,36 @@ User.create = (user) => {
         user.image,
         user.password
     ]);
+};
+
+User.update = (user) => {
+    const sql = `
+        UPDATE
+            users
+        SET
+            name = $2,
+            lastname = $3,
+            phone = $4,
+            image = $5
+        WHERE
+            id = $1
+    `;
+    return db.none(sql, [
+        user.id,
+        user.name,
+        user.lastname,
+        user.phone,
+        user.image,
+        new Date()
+    ]);
+    // const userUpdated = db.one(sql, [
+    //     user.id,
+    //     user.name,
+    //     user.lastname,
+    //     user.phone,
+    //     user.image,
+    // ]);
+    // if (!userUpdated) throw new Error('User not updated');
+    // return userUpdated;
 };
 module.exports = User;
