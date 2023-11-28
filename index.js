@@ -46,7 +46,7 @@ app.disable('x-powered-by'); //es linea de seguridad para que no se sepa que tec
 
 //utilizar rutas
 Auth(app, upload);
-User(app);
+User(app, upload);
 
 
 // app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(require('./libs/swagger/swagger.json')));
