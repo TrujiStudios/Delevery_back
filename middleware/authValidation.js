@@ -19,7 +19,6 @@ function validateToken(req, res, next) {
         const [, token] = bearer.split("Bearer ");
 
         if (token) {
-            console.log(token);
             try {
                 const decodedToken = verifyToken(token);
                 req.user = decodedToken;
