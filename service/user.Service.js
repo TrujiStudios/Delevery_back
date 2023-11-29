@@ -1,6 +1,9 @@
+const jwt = require('jsonwebtoken');
+
 const User = require('../database/models/user.Model');
 const Role = require('../database/models/role.Model');
 const storage = require('../utils/cloud_storage');
+const { verifyToken } = require('../middleware/authValidation');
 
 // const {Role : roleModel} = require('../database/models/role.Model');
 
@@ -34,10 +37,19 @@ class UserService {
         return results;
     }
 
-    async findByUserId(idUser){
-        const user = await this.user.findByUserId(idUser);
-        return user;
+    async findByUserId(idUser, user){
+        if(user.id === idUser){
+            const result = await this.user.findByUserId(idUser);
+            return result;
+        }
+        throw new Error('Error al obtener usuario');
     }
+    
+    
+
+
+
+   
     
 }
 
