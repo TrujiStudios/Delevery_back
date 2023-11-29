@@ -4,6 +4,7 @@ const express = require('express');
 
 // const userService = require('../service/user.Service');
 const UserService = require("../service/user.Service");
+const {validateToken} = require('../middleware/authValidation');
 
 // const authResponse = require('../helpers/authResponse');
 // const authMiddleware = require('../middleware/authValidation');
@@ -33,8 +34,8 @@ function userRoute(app,upload) {
             // next(err);
         }
     });
-
-    router.get("/findByUserId/:idUser", async (req, res, next) => {
+//!validar quien hace la peticion de registro de usuario
+    router.get("/findByUserId/:idUser",validateToken, async (req, res, next) => {
         try {
             const result = await userServ.findByUserId(req.params.idUser)
             res.json({
