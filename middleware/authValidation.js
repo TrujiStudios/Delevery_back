@@ -13,7 +13,7 @@ function verifyToken(token) {
 }
 
 function validateToken(req, res, next) {
-    const bearer = req.headers.autorization;
+    const bearer = req.headers.authorization;
 
     if (bearer && bearer.startsWith('Bearer')) {
         const [, token] = bearer.split("Bearer ");
@@ -54,6 +54,38 @@ function roleValidation(requiredRoles) {
     };
 }
 
+// Ejemplo de uso: 
+function getUserFromToken(token) {
+    try {
+        const decodedToken = verifyToken(token);
+        // Aquí puedes acceder a la información del usuario desde el token decodificado
+        const userId = decodedToken.id;
+        const userEmail = decodedToken.email;
+        // ... otras propiedades del usuario que estén en el token
+
+        // Por ejemplo, podrías devolver un objeto con la información del usuario
+        return {
+            id: userId,
+            email: userEmail,
+            // ... otras propiedades del usuario
+        };
+    } catch (error) {
+        // Manejo de errores si el token no es válido
+        console.error('Error decoding token:', error.message);
+        return null;
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
 const superAdminValidation = roleValidation(["superAdmin"]);
 const adminValidation = roleValidation(["admin", "superAdmin"]);
 const gestorValidation = roleValidation(["gestor", "superAdmin"]);
@@ -70,4 +102,4 @@ function authMiddleware(roles) {
     return [validateToken, ...selectedMiddlewares];
 }
 
-module.exports = {authMiddleware, validateToken}
+module.exports = { authMiddleware, validateToken, verifyToken, getUserFromToken }
