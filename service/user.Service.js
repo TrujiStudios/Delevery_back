@@ -12,19 +12,22 @@ class UserService {
         // const User = new User();
         this.user = User;
     }
-    async getAllUsers(){
+    async getAllUsers() {
         const users = await this.user.getAll();
         return users;
     }
     //TODO : FALTA VALIDAR LOS DATOS DE REGISTRO DE USUARIO
-    async createUser(data){
+    async createUser(data) {
         const user = await this.user.create(data);
         await Role.create(user.id, 1);
-        if(!user) throw new Error('Error al crear usuariooo');
+        if (!user) throw new Error('Error al crear usuariooo');
         return user;
     }
 
     async updateWithimages(user, files) {
+
+        await this.user.findByUserId(user.id);
+
         if (files.length > 0) {
             const pathImage = `images_${Date.now()}`
             const url = await storage(files[0], pathImage, null)
@@ -32,25 +35,25 @@ class UserService {
                 user.image = url
             }
         }
-        console.log(user)
         const results = await this.user.update(user);
         return results;
     }
 
-    async findByUserId(idUser, user){
-        if(user.id === idUser){
+    async findByUserId(idUser, user) {
+        await this.user.findByUserId(idUser);
+        if (user.id === idUser) {
             const result = await this.user.findByUserId(idUser);
             return result;
         }
         throw new Error('Error al obtener usuario');
     }
-    
-    
 
 
 
-   
-    
+
+
+
+
 }
 
 module.exports = UserService;
