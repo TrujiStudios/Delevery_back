@@ -34,7 +34,7 @@ class authService {
             email: myUser.email,
             phone: myUser.phone,
             image: myUser.image,
-            session_token: `JWT ${token}`,
+            session_token: `${token}`,
             roles: myUser.roles
         }
 
