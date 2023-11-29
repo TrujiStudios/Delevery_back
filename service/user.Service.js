@@ -4,7 +4,6 @@ const storage = require('../utils/cloud_storage');
 
 // const {Role : roleModel} = require('../database/models/role.Model');
 
-
 class UserService {
     constructor() {
         // const User = new User();
