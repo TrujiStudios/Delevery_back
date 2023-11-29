@@ -37,7 +37,9 @@ function userRoute(app,upload) {
 //!validar quien hace la peticion de registro de usuario
     router.get("/findByUserId/:idUser",validateToken, async (req, res, next) => {
         try {
-            const result = await userServ.findByUserId(req.params.idUser)
+            const user = req.user;
+
+            const result = await userServ.findByUserId(req.params.idUser, user);
             res.json({
                 success: true,
                 message: "get all",
