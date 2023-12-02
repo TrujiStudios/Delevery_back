@@ -40,11 +40,11 @@ class UserService {
     }
 
     async findByUserId(idUser, user) {
-        await this.user.findByUserId(idUser);
-        if (user.id === idUser) {
+        // await this.user.findByUserId(idUser);
+        // if (user.id === idUser) {
             const result = await this.user.findByUserId(idUser);
             return result;
-        }
+        // }
         throw new Error('Error al obtener usuario');
     }
 
