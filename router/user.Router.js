@@ -1,16 +1,17 @@
 'use strict';
 
 const express = require('express');
+const passport = require('passport');
 
 // const userService = require('../service/user.Service');
 const UserService = require("../service/user.Service");
-const {validateToken} = require('../middleware/authValidation');
+const { validateToken } = require('../middleware/authValidation');
 
 // const authResponse = require('../helpers/authResponse');
 // const authMiddleware = require('../middleware/authValidation');
 
 
-function userRoute(app,upload) {
+function userRoute(app, upload) {
     const router = express.Router();
     const userServ = new UserService()
 
@@ -34,8 +35,9 @@ function userRoute(app,upload) {
             // next(err);
         }
     });
-//!validar quien hace la peticion de registro de usuario
-    router.get("/findByUserId/:idUser",validateToken, async (req, res, next) => {
+    // ,validateToken,
+    //!validar quien hace la peticion de registro de usuario
+    router.get("/findByUserId/:idUser", passport.authenticate('jwt', { session: false }), async (req, res, next) => {
         try {
             const user = req.user;
 
@@ -43,7 +45,7 @@ function userRoute(app,upload) {
             res.json({
                 success: true,
                 message: "get all",
-                data:result
+                data: result
             })
         } catch (err) {
             console.log(`Error: ${err}`);
@@ -56,7 +58,10 @@ function userRoute(app,upload) {
         }
     });
 
-    router.put("/update", upload.array('image', 1), async (req, res, next) => {
+    router.put("/update", 
+        passport.authenticate('jwt', { session: false }),
+        upload.array('image', 1)
+    , async (req, res, next) => {
         try {
             const user = JSON.parse(req.body.user);
             const files = req.files;
