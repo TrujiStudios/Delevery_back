@@ -11,6 +11,7 @@ const config = {
   secretOrKey: process.env.SECRET_OR_KEY,
   id_developer: process.env.ID_DEVELOPER,
   storageBucket: process.env.STORAGE_BUCKET || 'gs://delivey-app-trujistudios.appspot.com/',
+  sessionSecret: process.env.SESSION_SECERT || 'secret',
   database: {
     dbHost: process.env.DB_HOST || 'ep-lingering-base-73023017.eu-central-1.aws.neon.tech',
     port: process.env.DB_PORT || 5432,
