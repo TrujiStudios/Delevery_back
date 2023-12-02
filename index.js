@@ -3,6 +3,11 @@ const morgan = require('morgan');
 const cors = require('cors');
 const multer = require('multer')
 const admin = require('firebase-admin')
+const passport = require('passport');
+const session = require("express-session")
+
+
+
 const serviceAccount = require('./serviceAccountKey.json')
 // const swaggerUi = require('swagger-ui-express');
 const { config } = require("./config/config");
@@ -38,6 +43,18 @@ app.use(cors("*"))
 //     origin:["http://localhost:3000","http://127.0.0.1:5500"],
 //     credentials:true
 // }))
+app.use(session({
+    secret:config.secretOrKey,
+    resave:false,
+    saveUninitialized:false
+}))//Redis)
+
+app.use(passport.initialize());
+
+app.use(passport.session());
+
+require('./bin/passport')(passport);
+
 app.disable('x-powered-by'); //es linea de seguridad para que no se sepa que tecnologia se esta utilizando en el backend
 
 
