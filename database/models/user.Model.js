@@ -74,8 +74,6 @@ User.findByUserId = async (idUser) => {
 }
 
 
-
-
 // find user by email
 User.findByEmail = async (email) => {
     const sql = `SELECT 
@@ -181,4 +179,32 @@ User.update = (user) => {
     // if (!userUpdated) throw new Error('User not updated');
     // return userUpdated;
 };
+
+User.updateSessionToken = async (id,token) => {
+    const sql = `
+        UPDATE
+            users
+        SET
+            session_token = $2
+        WHERE
+            id = $1
+    `;
+    // retornar con operador ternario
+    const response = await db.none(sql, [
+        id,
+        token,
+    ]);
+
+    return response ? response : new Error('Token not updated');
+    
+    
+};
 module.exports = User;
+
+
+// return 
+    
+//     db.none(sql, [
+//         id,
+//         token,
+//     ]);
