@@ -48,6 +48,11 @@ class UserService {
         throw new Error('Error al obtener usuario');
     }
 
+    async logout(idUser) {
+        const user = await this.user.updateSessionToken(idUser, null);
+        if (!user) throw new Error('Error al cerrar sesion');
+        return user;
+    }
 
 
 
