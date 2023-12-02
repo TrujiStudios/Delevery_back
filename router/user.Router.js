@@ -37,7 +37,7 @@ function userRoute(app, upload) {
     });
     // ,validateToken,
     //!validar quien hace la peticion de registro de usuario
-    router.get("/findByUserId/:idUser", passport.authenticate('jwt', { session: false }), async (req, res, next) => {
+    router.get("/findByUserId/:idUser", passport.authenticate('jwt', { session: false }), async (req, res, next) => { // el jwt es el nombre de la estrategia que se creo en el passport.js para validar el token osea el token debe de tener el jwt en el header 
         try {
             const user = req.user;
 
