@@ -17,7 +17,7 @@ const app = express();
 //importar rutas
 const Auth = require('./router/auth.Router');
 const User = require('./router/user.Router');
-
+const Category = require('./router/Category.Router');
 
 //INICIAR FIREBASE ADMIN
 admin.initializeApp({
@@ -64,6 +64,7 @@ app.disable('x-powered-by'); //es linea de seguridad para que no se sepa que tec
 //utilizar rutas
 Auth(app, upload);
 User(app, upload);
+Category(app);
 
 
 // app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(require('./libs/swagger/swagger.json')));
