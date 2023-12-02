@@ -72,7 +72,8 @@ class authService {
             // session_token: user.session_token
         };
         const token = jwt.sign(payload, config.secretOrKey, {
-            expiresIn: 60 * 60 * 24 // 1 HORA
+            // expiresIn: 60 * 2 // 2 MINUTOS
+            // expiresIn: 60 * 60 * 24 // 1 HORA
         });
         return token;
     }
