@@ -81,5 +81,25 @@ function userRoute(app, upload) {
         }
     });
 
+    // metodo logout
+    router.post("/logout", async (req, res, next) => {
+        try {
+            // const result = await userServ.logout(req.user.id);
+            const result = await userServ.logout(req.body.id);
+            return res.status(201).json({
+                message: "Se ha cerrado la sesion con exito",
+                success: true,
+                error: null,
+            })
+        } catch (err) {
+            console.log(`Error: ${err}`);
+            return res.status(501).json({
+                message: "Error: al desloguear el usuario",
+                error: err.message,
+                success: false,
+            });
+        }
+    });
+
 }
 module.exports = userRoute;
