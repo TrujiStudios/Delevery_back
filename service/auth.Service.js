@@ -34,9 +34,11 @@ class authService {
             email: myUser.email,
             phone: myUser.phone,
             image: myUser.image,
-            session_token: `${token}`,
+            session_token: `JWT ${token}`,
             roles: myUser.roles
         }
+
+        await User.updateSessionToken(myUser.id, data.session_token);
 
         return data;
     }
@@ -62,12 +64,12 @@ class authService {
     #createToken(user) {
         const payload = {
             id: user.id,
-            email: user.email,
-            name: user.name,
-            lastname: user.lastname,
-            image: user.image,
-            phone: user.phone,
-            session_token: user.session_token
+            // email: user.email,
+            // name: user.name,
+            // lastname: user.lastname,
+            // image: user.image,
+            // phone: user.phone,
+            // session_token: user.session_token
         };
         const token = jwt.sign(payload, config.secretOrKey, {
             expiresIn: 60 * 60 * 24 // 1 HORA
