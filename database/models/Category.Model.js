@@ -19,4 +19,21 @@ Category.create = (category) => {
         ]);
 };
 
+
+//find user by id vaslidate category
+Category.findByIdValidate = (id) => {
+    const sql = `
+        SELECT
+            *
+        FROM
+            categories
+        WHERE
+            id = $1
+    `;
+    // return db.oneOrNone(sql, [id]);
+    const category = db.oneOrNone(sql, [id]);
+    if (!category) throw new Error('Category not found');
+    return category;
+};
+
 module.exports = Category;
