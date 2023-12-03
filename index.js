@@ -18,6 +18,7 @@ const app = express();
 const Auth = require('./router/auth.Router');
 const User = require('./router/user.Router');
 const Category = require('./router/Category.Router');
+const Products = require('./router/product.Router');
 
 //INICIAR FIREBASE ADMIN
 admin.initializeApp({
@@ -65,6 +66,7 @@ app.disable('x-powered-by'); //es linea de seguridad para que no se sepa que tec
 Auth(app, upload);
 User(app, upload);
 Category(app);
+Products(app);
 
 
 // app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(require('./libs/swagger/swagger.json')));
