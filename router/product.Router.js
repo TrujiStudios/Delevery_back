@@ -4,7 +4,7 @@ const express = require('express');
 const ProductService = require("../service/product.Servise");
 
 
-function userRoute(app, upload) {
+function productRoute(app) {
     const router = express.Router();
     const ProductServ = new ProductService()
 
@@ -29,4 +29,4 @@ function userRoute(app, upload) {
         }
     });
 }
-module.exports = userRoute;
+module.exports = productRoute;
