@@ -1,6 +1,8 @@
 'use strict';
 
 const express = require('express');
+const passport = require('passport');
+
 const CategoryService = require('../service/Category.Service');
 
 
@@ -11,7 +13,7 @@ function categoryRoute(app, upload) {
 
     app.use('/api/Category', router);
 
-    router.post('/create', async (req, res, next) => {
+    router.post('/create',passport.authenticate('jwt', { session: false }), async (req, res, next) => {
         try {
             const category = await categoryServ.categoresCreate(req.body);
             return res.status(201).json({
@@ -24,7 +26,7 @@ function categoryRoute(app, upload) {
         } catch (error) {
             console.log(`Error: ${error}`);
             return res.status(501).json({
-                message: "Error: al crear el usuario",
+                message: "Error: al crear la categoria",
                 error: error.message,
                 success: false,
             });
