@@ -17,7 +17,7 @@ function categoryRoute(app, upload) {
         try {
             const category = await categoryServ.categoresCreate(req.body);
             return res.status(201).json({
-                message: "SE CREO CORRECTAMENTE",
+                message: "Categoria creada correctamente",
                 success: true,
                 error: null,
                 data: category.id
