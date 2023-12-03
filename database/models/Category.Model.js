@@ -2,6 +2,22 @@ const db = require('../db');
 
 const Category = {};
 
+
+// find all
+Category.findAll = () => {
+    const sql = `
+        SELECT
+            id,
+            name,
+            description
+        FROM
+            categories
+        ORDER BY 
+            name
+    `;
+    return db.manyOrNone(sql);
+};
+
 // find create
 Category.create = (category) => {
     const sql = `
@@ -12,7 +28,7 @@ Category.create = (category) => {
             )
         VALUES($1, $2) RETURNING id
     `;
-    return db.oneOrNone(sql, 
+    return db.oneOrNone(sql,
         [
             category.name,
             category.description
