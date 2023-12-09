@@ -66,7 +66,7 @@ app.disable('x-powered-by'); //es linea de seguridad para que no se sepa que tec
 Auth(app, upload);
 User(app, upload);
 Category(app);
-Products(app);
+Products(app, upload);
 
 
 // app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(require('./libs/swagger/swagger.json')));
