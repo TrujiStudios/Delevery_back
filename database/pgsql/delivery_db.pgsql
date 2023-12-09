@@ -51,7 +51,7 @@ CREATE TABLE products (
   name VARCHAR(255) NOT NULL UNIQUE,
   description VARCHAR(255) NOT NULL,
   price DECIMAL DEFAULT 0,
-  image1 VARCHAR(255) NULL,
+  image1 VARCHAR(255) NOT NULL,
   image2 VARCHAR(255) NULL,
   image3 VARCHAR(255) NULL,
   category_id BIGINT NOT NULL,
