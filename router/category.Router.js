@@ -34,6 +34,29 @@ function categoryRoute(app, upload) {
             next(error);
         }
     });
+
+    router.get('/findall',passport.authenticate('jwt', { session: false }), async (req, res, next) => {
+        try {
+            const category = await categoryServ.findAllCategory();
+            console.log(category);
+            return res.status(201).json({
+                message: " Categoria encontrada correctamente",
+                success: true,
+                error: null,
+                data: category
+            })
+
+        } catch (error) {
+            console.log(`Error: ${error}`);
+            return res.status(501).json({
+                message: "Error: al encontrar la categoria ",
+                error: error.message,
+                success: false,
+            });
+
+            next(error);
+        }
+    });
 }
 
 module.exports = categoryRoute;
