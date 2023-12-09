@@ -39,7 +39,7 @@ class UserService {
         return results;
     }
 
-    async findByUserId(idUser, userId) {
+    async findByUserId(userId, idUser) {
         await this.user.findByUserId(userId);
         const result = await this.user.findByUserId(idUser);
         if (userId != idUser) throw new Error('Error al obtener usuario');
