@@ -39,20 +39,21 @@ function userRoute(app, upload) {
     //!validar quien hace la peticion de registro de usuario
     router.get("/findByUserId/:idUser", passport.authenticate('jwt', { session: false }), async (req, res, next) => { // el jwt es el nombre de la estrategia que se creo en el passport.js para validar el token osea el token debe de tener el jwt en el header 
         try {
-            const user = req.user;
+            const idUser = req.user.id;
+            const userId = req.params.idUser;
 
-            const result = await userServ.findByUserId(req.params.idUser, user);
+            const result = await userServ.findByUserId(userId, idUser);
             res.json({
                 success: true,
                 message: "get all",
                 data: result
             })
-        } catch (err) {
-            console.log(`Error: ${err}`);
+        } catch (error) {
+            console.log(`Error: ${error}`);
             return res.status(501).json({
                 success: false,
                 message: "Error: al obtener los usuarios",
-                err
+                error
             });
             // next(err);
         }
