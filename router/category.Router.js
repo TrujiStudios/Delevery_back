@@ -38,7 +38,6 @@ function categoryRoute(app, upload) {
     router.get('/findall',passport.authenticate('jwt', { session: false }), async (req, res, next) => {
         try {
             const category = await categoryServ.findAllCategory();
-            console.log(category);
             return res.status(201).json({
                 message: " Categoria encontrada correctamente",
                 success: true,
