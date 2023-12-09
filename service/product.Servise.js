@@ -2,6 +2,8 @@
 
 const UserService = require('../service/user.Service');
 const categoryService = require('./Category.Service');
+const Storage = require('../utils/cloud_storage');
+
 
 const Product = require('../database/models/product.Model');
 
@@ -18,17 +20,17 @@ class ProductService {
 
     async createCategory(product, idUser, userId, files) {
 
-        await this.userServ.findByUserId(idUser, userId);
-        await this.categoryServ.findByCategoryId(data.category_id, idUser, userId);
+        // await this.userServ.findByUserId(idUser, userId);
+        // await this.categoryServ.findByCategoryId(data.category_id, idUser, userId);
 
 
         let inserts = 0;
 
-        if (FileSystem.length === 0) {
+        if (files.length === 0) {
             throw new Error("No se ha enviado ninguna imagen")
         }
         const data = await this.product.create(product);
-        product.id = data.id;
+        product.id = data.id; // asignar el id del producto creado
 
         const start = async () => {
             await async_foreach(files, async (file) => {
@@ -58,9 +60,9 @@ class ProductService {
             });
         }
 
-        await start(); 
+        await start();
 
-        // return result;
+        // return 
     }
 }
 
