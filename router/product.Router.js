@@ -26,7 +26,7 @@ function productRoute(app, upload) {
                     message: "Producto creado correctamente ",
                     success: true,
                     error: null,
-                    data: result.id
+                    // data: result.id
                 })
             } catch (error) {
                 console.error(`Error: ${error}`);
