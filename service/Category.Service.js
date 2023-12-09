@@ -29,5 +29,13 @@ class categoryService {
             throw error;
         }
     }
+
+    async findAllCategory() {
+
+        const result = await this.category.findAll();
+        if (!result) throw new Error('Error al obtener categoria');
+        return result;
+
+    }
 }
 module.exports = categoryService;
