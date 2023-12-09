@@ -25,7 +25,7 @@ Product.create = (product) => {
             product.image1,
             product.image2,
             product.image3,
-            product.category_id
+            product.idCategori
         ]);
 };
 
@@ -52,7 +52,7 @@ Product.update = (product) => {
             product.image1,
             product.image2,
             product.image3,
-            product.category_id
+            product.idCategori
         ]);
 };
 
