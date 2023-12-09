@@ -29,4 +29,31 @@ Product.create = (product) => {
         ]);
 };
 
+
+Product.update = (product) => {
+    const sql = `
+        UPDATE products SET
+            name=$2,
+            description=$3,
+            price=$4,
+            image1=$5,
+            image2=$6,
+            image3=$7,
+            category_id=$8
+        WHERE
+            id=$1
+    `;
+    return db.none(sql, 
+        [
+            product.id,
+            product.name,
+            product.description,
+            product.price,
+            product.image1,
+            product.image2,
+            product.image3,
+            product.category_id
+        ]);
+};
+
 module.exports = Product;
