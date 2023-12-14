@@ -4,14 +4,14 @@ require("dotenv").config();
 const config = {
   port: process.env.PORT,
   env: process.env.NODE_ENV || 'development',
-  production: process.env.NODE_ENV === 'false',
+  production: process.env.NODE_ENV,
   emailService: process.env.EMAIL_SERVICE,
   emailUser: process.env.EMAIL_USER,
   emailPass: process.env.EMAIL_PASS,
   secretOrKey: process.env.SECRET_OR_KEY,
   id_developer: process.env.ID_DEVELOPER,
-  storageBucket: process.env.STORAGE_BUCKET || 'gs://delivey-app-trujistudios.appspot.com/',
-  sessionSecret: process.env.SESSION_SECERT || 'secret',
+  storageBucket: process.env.STORAGE_BUCKET,
+  sessionSecret: process.env.SESSION_SECERT,
   database: {
     dbHost: process.env.DB_HOST,
     port: process.env.DB_PORT,
