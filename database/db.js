@@ -17,14 +17,14 @@ types.setTypeParser(1114, function (stringValue) {
 });
 
 const databaseConfig = {
-    'host': config.database.dbHost || 'ep-long-salad-98579158.us-east-2.aws.neon.fl0.io',
-    'port': config.database.port || 5432,
-    'database': config.database.dbName || 'delivery',
-    'user': config.database.dbUsername || 'fl0user',
-    'password': config.database.dbPassword || '0a3dHgBcWmJs',
+    'host': config.database.dbHost,
+    'port': config.database.port,
+    'database': config.database.dbName,
+    'user': config.database.dbUsername,
+    'password': config.database.dbPassword,
 };
 
 // const db = pgp(databaseConfig);
-const db = pgp('postgres://fl0user:0a3dHgBcWmJs@ep-long-salad-98579158.us-east-2.aws.neon.fl0.io:5432/delivery?sslmode=require');
+const db = pgp('postgresql://postgres:12df-aeG13C-B-ECEADe-*Ca-B6Ede2*@viaduct.proxy.rlwy.net:30924/railway');
 
 module.exports = db;
