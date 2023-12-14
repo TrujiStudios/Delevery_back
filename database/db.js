@@ -17,14 +17,14 @@ types.setTypeParser(1114, function (stringValue) {
 });
 
 const databaseConfig = {
-    'host': config.database.dbHost,
-    'port': config.database.port,
-    'database': config.database.dbName,
-    'user': config.database.dbUsername,
-    'password': config.database.dbPassword
+    'host': config.database.dbHost || 'ep-long-salad-98579158.us-east-2.aws.neon.fl0.io',
+    'port': config.database.port || 5432,
+    'database': config.database.dbName || 'delivery',
+    'user': config.database.dbUsername || 'fl0user',
+    'password': config.database.dbPassword || '0a3dHgBcWmJs',
 };
 
 // const db = pgp(databaseConfig);
-const db = pgp('postgres://delivery_u3pg_user:Zwg638GlqfX3oLHj47wTu5JmetRIx1Ft@dpg-cltig9ocmk4c738sh98g-a/delivery_u3pg');
+const db = pgp('postgres://fl0user:0a3dHgBcWmJs@ep-long-salad-98579158.us-east-2.aws.neon.fl0.io:5432/delivery?sslmode=require');
 
 module.exports = db;

@@ -2,7 +2,7 @@ require("dotenv").config();
 
 
 const config = {
-  port: process.env.PORT || 3000,
+  PORT: process.env.PORT || 5000,
   env: process.env.NODE_ENV || "development",
   production: process.env.NODE_ENV === "production",
   emailService: process.env.EMAIL_SERVICE,
