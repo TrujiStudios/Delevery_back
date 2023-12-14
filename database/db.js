@@ -24,6 +24,7 @@ const databaseConfig = {
     'password': config.database.dbPassword
 };
 
-const db = pgp(databaseConfig);
+// const db = pgp(databaseConfig);
+const db = pgp('postgres://delivery_u3pg_user:Zwg638GlqfX3oLHj47wTu5JmetRIx1Ft@dpg-cltig9ocmk4c738sh98g-a/delivery_u3pg');
 
 module.exports = db;
