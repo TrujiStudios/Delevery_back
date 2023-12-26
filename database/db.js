@@ -24,7 +24,6 @@ const databaseConfig = {
     'password': config.database.dbPassword,
 };
 
-// const db = pgp(databaseConfig);
-const db = pgp('postgresql://postgres:12df-aeG13C-B-ECEADe-*Ca-B6Ede2*@viaduct.proxy.rlwy.net:30924/railway');
+const db = pgp(databaseConfig);
 
 module.exports = db;
