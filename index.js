@@ -17,7 +17,7 @@ const app = express();
 //importar rutas
 const Auth = require('./router/auth.Router');
 const User = require('./router/user.Router');
-const Category = require('./router/Category.Router');
+const Category = require('./router/category.Router');
 const Products = require('./router/product.Router');
 
 //INICIAR FIREBASE ADMIN
