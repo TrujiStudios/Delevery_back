@@ -12,6 +12,31 @@ function productRoute(app, upload) {
 
     app.use('/api/products', router);
 
+
+
+
+    router.get("/category/:id",
+        passport.authenticate('jwt', { session: false }),
+        async (req, res, next) => {
+            try {
+                const id = req.params.id;
+                const data = await ProductServ.findByCategory(id);
+                return res.status(200).json({
+                    message: "Productos encontrados",
+                    success: true,
+                    error: null,
+                    data: data
+                })
+            } catch (error) {
+                console.error(`Error: ${error}`);
+                return res.status(501).json({
+                    message: error.message,
+                    error: error.message,
+                    success: false,
+                });
+            }
+        });
+
     router.post("/create",
         passport.authenticate('jwt', { session: false }),
         upload.array('image', 3),

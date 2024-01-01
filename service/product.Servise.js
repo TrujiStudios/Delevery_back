@@ -18,6 +18,14 @@ class ProductService {
 
     }
 
+
+
+
+    async findByCategory(category_id) {
+        const data = await this.product.findByCategory(category_id);
+        return data;
+    }
+
     async createCategory(product, idUser, userId, files) {
 
         // await this.userServ.findByUserId(idUser, userId);

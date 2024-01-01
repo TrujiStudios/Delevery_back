@@ -1,0 +1,34 @@
+version: '3'
+services:
+  nodejs:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: delivery_back
+    ports:
+      - "5000:5000"
+    volumes:
+      - .:/usr/src/app
+    depends_on:
+      - postgres
+
+  postgres:
+    image: postgres
+    container_name: delivery_db
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: delivery_db
+
+  adminer:
+    image: adminer
+    container_name: delivery_adminer
+    ports:
+      - "8080:8080"
+    depends_on:
+      - postgres
+
+
+# docker-compose up -d
